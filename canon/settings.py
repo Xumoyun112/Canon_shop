@@ -82,7 +82,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "canon_db",        # yuqorida yaratgan db nomi
-        "USER": "postgres",      # yaratgan user
+        "USER": "canon",      # yaratgan user
         "PASSWORD": "10291029",# user paroli
         "HOST": "localhost",       # serverga qo‘yganingda "db" yoki IP bo‘ladi
         "PORT": "5432",            # default port
