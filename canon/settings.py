@@ -24,6 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-vzo1-3fp-f&3yao@4!#p@ti6p=a#ihb&*agp5x%56y=w!i_!+s'
 
+CSRF_TRUSTED_ORIGINS = [
+    "http://45.55.211.182",
+]
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -123,6 +127,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
@@ -294,8 +299,8 @@ CRONJOBS = [
     ('0 0 * * *', 'django.core.management.call_command', ['export_daily_sales']),
 ]
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
