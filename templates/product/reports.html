@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">📊 Savdo Hisobotlari</h2>
+
+    <div class="row">
+        <!-- Bugungi savdo -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-success shadow rounded-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Bugungi Savdo</h5>
+                    <p class="display-6 fw-bold">{{ daily_total }} usd</p>
+                    <i class="bi bi-calendar-day" style="font-size: 2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Oylik savdo -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-primary shadow rounded-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Oylik Savdo</h5>
+                    <p class="display-6 fw-bold">{{ monthly_total }} usd</p>
+                    <i class="bi bi-calendar-month" style="font-size: 2rem;"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Yillik savdo -->
+        <div class="col-md-4 mb-3">
+            <div class="card text-white bg-warning shadow rounded-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Yillik Savdo</h5>
+                    <p class="display-6 fw-bold">{{ yearly_total }} usd</p>
+                    <i class="bi bi-calendar-year" style="font-size: 2rem;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

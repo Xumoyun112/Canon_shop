@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Mahsulotlar ro'yxati</h2>
+<table class="table">
+  <tr>
+    <th>Nomi</th>
+    <th>Narxi</th>
+    <th>Soni</th>
+    <th>Jami</th>
+  </tr>
+  {% for p in products %}
+  <tr>
+    <td>{{ p.name }}</td>
+    <td>{{ p.price }}</td>
+    <td>{{ p.stock }}</td>
+    <td>{{ p.total_value }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

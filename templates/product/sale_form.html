@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Yangi Sotuv</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+                <textarea class="form-control rounded-3 shadow-sm"
+                    id="description"
+                    name="description"
+                    rows="4"
+                    placeholder="Mahsulot haqida izoh yozing..."></textarea>
+        </div>
+        <p class="product_price text-success"></p>
+        <p class="product_stock text-info"></p>
+        <button type="submit" class="btn btn-success">Sotishni amalga oshirish</button>
+    </form>
+</div>
+{% endblock %}

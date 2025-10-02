@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Speska #{{ speska.id }} ({{ speska.date }})</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mahsulot</th>
+                    <th>Soni</th>
+                    <th>Dona narx</th>
+                    <th>Umumiy</th>
+                    {% if not speska.is_finalized %}
+                    <th>Izoh</th>
+                    {% endif %}
+                    <th>Amal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sale in speska.sales.all %}
+                <tr>
+                    <td>{{ sale.product.name }}</td>
+                    <td>{{ sale.quantity }}</td>
+                    <td>{{ sale.price }}</td>
+                    <td>{{ sale.total_price }}</td>
+                    <td>{{ sale.description }}</td>
+                    {% if not speska.is_finalized %}
+                    <td>
+                        <form method="post" action="{% url 'delete_sale' speska.id sale.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">O‘chirish</button>
+                        </form>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    <h4>Jami: {{ speska.total_sum }}</h4>
+    {% if not speska.is_finalized %}
+    <h5>Mahsulot qo‘shish</h5>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p class="product_price"></p>
+        <p class="product_stock"></p>
+
+        <button class="btn btn-success">Qo‘shish</button>
+    </form>
+    {% else %}
+        <div class="alert alert-info">❌ Ushbu speska saqlangan, endi o‘zgartirib bo‘lmaydi.</div>
+    {% endif %}
+    {% if not speska.is_finalized %}
+        <form method="post" action="{% url 'finalize_speska' speska.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary mt-3">✅ Speskani saqlash</button>
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}

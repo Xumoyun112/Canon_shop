@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+{% load user_groups %}
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Dukon tizimi</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+
+    <!-- Custom CSS (agar kerak bo‘lsa) -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">🛒 Dukon tizimi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Mahsulotlar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/reports/">Hisobotlar</a>
+                    </li>
+                    {% if request.user|has_group:"Sotish" %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/speskas/">Speskalar</a>
+                        </li>
+                    {% endif %}
+                    {% if user.is_superuser %}
+                        <li>
+                            <a class="nav-link" href="/speskas/">Speskalar</a>
+                        </li>
+                        <li>
+
+                            <a href="{% url 'add_product' %}" class="btn btn-outline-primary">➕ Yangi mahsulot</a>
+                            <a href="{% url 'sale_create' %}" class="btn btn-outline-primary">Chiqim (Sotuv)</a>
+                        </li>
+                    {% else %}
+                        {% if request.user|has_group:"Sotish" %}
+                            <li class="nav-item">
+                                <a href="{% url 'sale_create' %}" class="btn btn-outline-primary">Chiqim (Sotuv)</a>
+                            </li>
+                        {% endif %}
+
+                        {% if request.user|has_group:"Kirish" %}
+                            <li class="nav-item">
+                                <a href="{% url 'add_product' %}" class="btn btn-outline-primary">➕ Yangi mahsulot</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/logout/">Chiqish</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/users/login/">Kirish</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mt-4">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p class="mb-0">&copy; 2025 Dukon tizimi</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- jQuery (kerak) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'product/js/product.js' %}"></script>
+</body>
+</html>

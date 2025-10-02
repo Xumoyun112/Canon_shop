@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Speskalar ro‘yxati</h2>
+    <a href="{% url 'speska_create' %}" class="btn btn-primary mb-3">Yangi Speska</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Sana</th>
+                <th>Jami summa</th>
+                <th>Izohlar</th>
+                <th>Ko‘rish</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in speskas %}
+            <tr>
+                <td>{{ s.id }}</td>
+                <td>{{ s.date }}</td>
+                <td>{{ s.total_sum }}</td>
+                <td>
+                    {% for sale in s.sales.all %}
+                        <p>- {{ sale.description }}</p>
+                    {% endfor %}
+                </td>
+                <td><a href="{% url 'speska_detail' s.id %}" class="btn btn-info btn-sm">Ochish</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
