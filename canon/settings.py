@@ -30,7 +30,7 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["45.55.211.182", "localhost", "domain.com","127.0.0.1", "127.0.0.1:8000"]
 
